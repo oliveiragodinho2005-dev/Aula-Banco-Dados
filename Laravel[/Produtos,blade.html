@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Produtos</title></head>
+<body>
+    <h1>Produtos</h1>
+
+    @if(session('sucesso'))
+        <p style="color: green;">{{ session('sucesso') }}</p>
+    @endif
+    @if($errors->any())
+        <ul style="color: red;">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    <form action="{{ route('produtos.store') }}" method="POST">
+        @csrf <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <button type="submit">Salvar</button>
+    </form>
+
+    <hr>
+
+    <h2>Lista de Produtos</h2>
+    <ul>
+        @foreach($produtos as $produto)
+            <li>{{ $produto->nome }}</li>
+        @endforeach
+    </ul>
+</body>
+</html>
